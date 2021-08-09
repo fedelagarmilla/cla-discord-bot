@@ -1,36 +1,44 @@
 //const Discord = require("discord.js");
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, Interaction} = require('discord.js');
 const puppeteer = require('puppeteer');
 require("dotenv").config();
 
 var floorValue = 'lava'
+console.log(process.version)
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 client.once('ready', () => {
     console.log('Ready!');
+    console.log(`Logged in as ${client.user.tag}!`)
     getFloor()
 });
 
 client.on('interactionCreate', interaction => {
     console.log(interaction);
+    if (!interaction.isCommand()) return;
+    const { commandName: command } = interaction;
 });
 
-client.login('ODczMjczODU4MDU1MDk0Mjgy.YQ2BqA.EjPoWg5EukZh_Xx1x4N28wGCwik').catch();
-//client.login(process.env.DISCORD_BOT_TOKEN);
+client.on("messageCreate", msg => {
+    handleMessage(msg)
+})
 
-/*const discordBot = new Discord.Client()
-discordBot.on("ready", () => {
-    console.log(`Logged in as ${discordBot.user.tag}!`)
-    // const channel = discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID)
-})
-discordBot.on("message", msg => {
-    if (msg.content === "floor") {
-        var response = "floor is " + floorValue
-        msg.reply(response);
+async function handleMessage(msg) {
+    if (msg.content === 'test') {
+        await msg.reply('success');
+    } else if (msg.content === '!floor') {
+        await msg.reply('🦎 FLOOR is ' + floorValue);
+    } else if (msg.content === '!mu') {
+        await msg.reply('🔥🐄 COW GANG! 🐄🔥');
+    } else if (msg.content === '!carrot') {
+        await msg.reply('🔥🥕🥕🥕🔥');
     }
-})
-discordBot.login(process.env.DISCORD_BOT_TOKEN);
-*/
+}
+
+client.login(process.env.DISCORD_BOT_TOKEN).catch(function(e) {
+    console.log(e);
+});
+
 async function getFloor() {
     console.log("old floor: " + floorValue);
 
@@ -49,4 +57,5 @@ async function getFloor() {
     await browser.close();
 }
 
+// refresh every 5 min
 setInterval(getFloor, 300000)
