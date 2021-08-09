@@ -37,8 +37,6 @@ async function deployMessage(msg) {
         await msg.reply('🦎 floor is 🌋');
     } catch (err) {
         console.error('failed deploy response : ' + err.message);
-    } finally {
-        await browser.close();
     }
 }
 
@@ -65,8 +63,6 @@ async function handleMessage(msg) {
     }
     } catch (err) {
         console.error('failed response message : ' + err.message);
-    } finally {
-        await browser.close();
     }
 }
 
