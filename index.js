@@ -47,6 +47,7 @@ async function getFloor() {
         args: ['--no-sandbox','--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
+    await page.setDefaultNavigationTimeout(0);
     await page.goto('https://opensea.io/collection/crazy-lizard-army');
     const [el] = await page.$x('/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div[4]/div[3]/a/div/div[1]/h3');
     const textContent = await el.getProperty('textContent')
