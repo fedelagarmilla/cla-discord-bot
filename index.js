@@ -3,8 +3,10 @@ const { Client, Intents, Interaction} = require('discord.js');
 const puppeteer = require('puppeteer');
 require("dotenv").config();
 
-var floorValue = 'lava'
+var floorValue = '🌋'
+var live = false
 console.log(process.version)
+
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 client.once('ready', () => {
@@ -20,18 +22,35 @@ client.on('interactionCreate', interaction => {
 });
 
 client.on("messageCreate", msg => {
-    handleMessage(msg)
+    if (live === false & msg.content === '!release the cow dragon bot')  {
+        deployMessage(msg)
+    }
+    if (live === true) {
+        handleMessage(msg)
+    }
 })
 
+async function deployMessage(msg) {
+    live = true
+    await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
+    await msg.reply('🦎 floor is 🌋');
+}
+
 async function handleMessage(msg) {
-    if (msg.content === 'test') {
-        await msg.reply('success');
-    } else if (msg.content === '!floor') {
-        await msg.reply('🦎 FLOOR is ' + floorValue);
-    } else if (msg.content === '!mu') {
-        await msg.reply('🔥🐄 COW GANG! 🐄🔥');
-    } else if (msg.content === '!carrot') {
-        await msg.reply('🔥🥕🥕🥕🔥');
+    switch (msg.content) {
+        case '!floor':
+            await msg.reply('🦎 floor is ' + floorValue + ' 🚀');
+            break
+        case '!mu':
+        case '!cow':
+            await msg.reply('🔥🐄 COW GANG 🐄🔥');
+            break
+        case '!carrot':
+            await msg.reply('🔥🥕 CARROT GANG 🥕🔥');
+            break
+        case '!when dragon':
+            await msg.reply('SOON 🦎🔥🐉');
+            break
     }
 }
 
