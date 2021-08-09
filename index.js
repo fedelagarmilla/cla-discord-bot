@@ -32,12 +32,20 @@ client.on("messageCreate", msg => {
 
 async function deployMessage(msg) {
     live = true
-    await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
-    await msg.reply('🦎 floor is 🌋');
+    try {
+        await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
+        await msg.reply('🦎 floor is 🌋');
+    } catch (err) {
+        console.error('failed deploy response : ' + err.message);
+    } finally {
+        await browser.close();
+    }
 }
 
 async function handleMessage(msg) {
-    switch (msg.content) {
+    try {
+
+        switch (msg.content) {
         case '!floor':
             await msg.reply('🦎 floor is ' + floorValue + ' 🚀');
             break
@@ -51,6 +59,14 @@ async function handleMessage(msg) {
         case '!when dragon':
             await msg.reply('SOON 🦎🔥🐉');
             break
+        case '!sweep':
+            await msg.reply('🦎🔥🐉');
+            break
+    }
+    } catch (err) {
+        console.error('failed response message : ' + err.message);
+    } finally {
+        await browser.close();
     }
 }
 
@@ -65,16 +81,23 @@ async function getFloor() {
         headless: true,
         args: ['--no-sandbox','--disable-setuid-sandbox']
     });
-    const page = await browser.newPage();
-    await page.setDefaultNavigationTimeout(0);
-    await page.goto('https://opensea.io/collection/crazy-lizard-army');
-    const [el] = await page.$x('/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div[4]/div[3]/a/div/div[1]/h3');
-    const textContent = await el.getProperty('textContent')
-    const jsonFloor = await textContent.jsonValue()
 
-    console.log("new floor: " + jsonFloor)
-    floorValue = jsonFloor
-    await browser.close();
+    try {
+        const page = await browser.newPage();
+        await page.setDefaultNavigationTimeout(0);
+        await page.goto('https://opensea.io/collection/crazy-lizard-army');
+        const [el] = await page.$x('/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div[4]/div[3]/a/div/div[1]/h3');
+        const textContent = await el.getProperty('textContent')
+        const jsonFloor = await textContent.jsonValue()
+
+        console.log("new floor: " + jsonFloor)
+        floorValue = jsonFloor
+        await browser.close();
+    } catch (err) {
+        console.error('failed opensea response : ' + err.message);
+    } finally {
+        await browser.close();
+    }
 }
 
 // refresh every 5 min
