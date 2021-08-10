@@ -22,45 +22,47 @@ client.on('interactionCreate', interaction => {
 });
 
 client.on("messageCreate", msg => {
-    if (live === false & msg.content === '!release the cow dragon bot')  {
-        deployMessage(msg)
+    if (msg.content === '!release the cow dragon bot')  {
+        live = true
     }
     if (live === true) {
         handleMessage(msg)
     }
 })
 
-async function deployMessage(msg) {
-    live = true
-    try {
-        await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
-        await msg.reply('🦎 floor is 🌋');
-    } catch (err) {
-        console.error('failed deploy response : ' + err.message);
-    }
-}
-
 async function handleMessage(msg) {
     try {
-
         switch (msg.content) {
-        case '!floor':
-            await msg.reply('🦎 floor is ' + floorValue + ' 🚀');
-            break
-        case '!mu':
-        case '!cow':
-            await msg.reply('🔥🐄 COW GANG 🐄🔥');
-            break
-        case '!carrot':
-            await msg.reply('🔥🥕 CARROT GANG 🥕🔥');
-            break
-        case '!when dragon':
-            await msg.reply('SOON 🦎🔥🐉');
-            break
-        case '!sweep':
-            await msg.reply('🦎🔥🐉');
-            break
-    }
+            case '!floor':
+                await msg.reply('🦎 floor is ' + floorValue + ' 🚀');
+                break
+            case '!release the cow dragon bot':
+                await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
+                break
+            case '!when dragon':
+                await msg.reply('SOON 🦎🔥🐉');
+                break
+            case '!sweep':
+                await msg.reply('🧹🧹🦎🦎🧹🧹🦎🦎');
+                break
+            case '!mu':
+            case '!cow':
+                await msg.reply('🔥🐄 COW GANG 🐄🔥');
+                break
+            case '!carrot':
+                await msg.reply('🔥🥕 CARROT GANG 🥕🔥');
+                break
+            case '!money':
+                await msg.reply('🔥🤑 MONEY GANG 🤑🔥');
+                break
+            case '!pop':
+            case '!candy':
+                await msg.reply('🔥🍭 POP GANG 🍭🔥');
+                break
+            case '!party':
+                await msg.reply('🔥🎧🎤 PARTY GANG 🎤🎧🔥');
+                break
+        }
     } catch (err) {
         console.error('failed response message : ' + err.message);
     }
