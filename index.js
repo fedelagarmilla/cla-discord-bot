@@ -39,11 +39,19 @@ async function handleMessage(msg) {
             case '!release the cow dragon bot':
                 await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
                 break
+            case '!good night':
+                await msg.reply('dont get swept by the wales while you sleep');
+                break
             case '!when dragon':
-                await msg.reply('SOON 🦎🔥🐉');
+            case '!wen dragon':
+            case '!when dragons':
+                await msg.reply('SOON 🦎🔥🧪🐉');
                 break
             case '!sweep':
                 await msg.reply('🧹🧹🦎🦎🧹🧹🦎🦎');
+                break
+            case '!paperhands':
+                await msg.reply('😕 NGMI 😕');
                 break
             case '!mu':
             case '!cow':
@@ -61,6 +69,19 @@ async function handleMessage(msg) {
                 break
             case '!party':
                 await msg.reply('🔥🎧🎤 PARTY GANG 🎤🎧🔥');
+                break
+            case '!kobe':
+                await msg.reply('🔥🏀 KOBEEEEE 🏀🔥');
+                break
+            case '!pistol':
+            case '!blaster':
+                await msg.reply('🔥🔫 PUNISHER GANG 🔫🔥');
+                break
+            case '!pimp':
+                await msg.reply('🔥💎 PIMP GANG 💎🔥');
+                break
+            case '!cream':
+                await msg.reply('🔥🍦 ICE GANG 🍦🔥');
                 break
         }
     } catch (err) {
