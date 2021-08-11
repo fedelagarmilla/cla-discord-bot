@@ -40,6 +40,9 @@ async function handleMessage(msg) {
             case '!release the cow dragon bot':
                 await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
                 break
+            case '!good morning':
+                await msg.reply('please delist');
+                break
             case '!good night':
                 await msg.reply('dont get swept by the wales while you sleep');
                 break
@@ -63,6 +66,9 @@ async function handleMessage(msg) {
             case '!roof':
             case '!cieling':
                 await msg.reply('🦎🚀🌒 MARS 🚀🌒🐉');
+                break
+            case '!general':
+                await msg.reply('🪖 everyone stand up 🪖');
                 break
             case '!mu':
             case '!cow':
