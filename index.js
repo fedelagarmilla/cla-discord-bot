@@ -33,7 +33,7 @@ client.on("messageCreate", msg => {
 // commands: floor, dragon, sweep, paper, mu/cow, carrot, money, pop/candy, party, kobe, pistol/gun, pimp, cream, zombie, bunny
 async function handleMessage(msg) {
     try {
-        switch (msg.content) {
+        switch (msg.content.toLowerCase()) {
             case '!floor':
                 await msg.reply('🦎 floor is ' + floorValue + ' 🚀');
                 break
@@ -55,6 +55,14 @@ async function handleMessage(msg) {
             case '!paper':
             case '!paperhands':
                 await msg.reply('😕 NGMI 😕');
+                break
+            case '!delist':
+            case '!hodl':
+                await msg.reply('🦎💎 HODL 💎🦎');
+                break
+            case '!roof':
+            case '!cieling':
+                await msg.reply('🦎🚀🌒 MARS 🚀🌒🐉');
                 break
             case '!mu':
             case '!cow':
