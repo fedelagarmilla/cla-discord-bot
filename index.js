@@ -30,6 +30,7 @@ client.on("messageCreate", msg => {
     }
 })
 
+// commands: floor, dragon, sweep, paper, mu/cow, carrot, money, pop/candy, party, kobe, pistol/gun, pimp, cream, zombie, bunny
 async function handleMessage(msg) {
     try {
         switch (msg.content) {
@@ -42,6 +43,7 @@ async function handleMessage(msg) {
             case '!good night':
                 await msg.reply('dont get swept by the wales while you sleep');
                 break
+            case '!dragon':
             case '!when dragon':
             case '!wen dragon':
             case '!when dragons':
@@ -50,6 +52,7 @@ async function handleMessage(msg) {
             case '!sweep':
                 await msg.reply('🧹🧹🦎🦎🧹🧹🦎🦎');
                 break
+            case '!paper':
             case '!paperhands':
                 await msg.reply('😕 NGMI 😕');
                 break
@@ -75,6 +78,7 @@ async function handleMessage(msg) {
                 break
             case '!pistol':
             case '!blaster':
+            case '!gun':
                 await msg.reply('🔥🔫 PUNISHER GANG 🔫🔥');
                 break
             case '!pimp':
@@ -82,6 +86,12 @@ async function handleMessage(msg) {
                 break
             case '!cream':
                 await msg.reply('🔥🍦 ICE GANG 🍦🔥');
+                break
+            case '!zombie':
+                await msg.reply('🔥🧟‍ ZOMBIE GANG 🧟‍🔥');
+                break
+            case '!bunny':
+                await msg.reply('🔥🐰‍ BUNNY GANG 🐰‍🔥');
                 break
         }
     } catch (err) {
