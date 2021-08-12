@@ -41,9 +41,11 @@ async function handleMessage(msg) {
                 await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
                 break
             case '!good morning':
+            case '!goodmorning':
                 await msg.reply('please delist');
                 break
             case '!good night':
+            case '!goodnight':
                 await msg.reply('dont get swept by the wales while you sleep');
                 break
             case '!dragon':
@@ -106,6 +108,13 @@ async function handleMessage(msg) {
                 break
             case '!bunny':
                 await msg.reply('🔥🐰‍ BUNNY GANG 🐰‍🔥');
+                break
+            case '!suit':
+                await msg.reply('🔥🤵‍ SUIT GANG 🤵‍🔥');
+                break
+            case '!spacesuit':
+            case '!space':
+                await msg.reply('🔥👨‍🚀‍ SPACE GANG 👨‍🚀‍🔥');
                 break
         }
     } catch (err) {
