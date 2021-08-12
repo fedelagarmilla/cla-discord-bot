@@ -35,7 +35,7 @@ async function handleMessage(msg) {
     try {
         switch (msg.content.toLowerCase()) {
             case '!floor':
-                await msg.reply('🦎 floor is ' + floorValue + ' 🚀');
+                await msg.reply('🦎 floor is ' + floorValue + ' 🚀' + '( not real time, opensea cannot keep up with our sales)');
                 break
             case '!release the cow dragon bot':
                 await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
@@ -52,7 +52,7 @@ async function handleMessage(msg) {
             case '!when dragon':
             case '!wen dragon':
             case '!when dragons':
-                await msg.reply('SOON 🦎🔥🧪🐉');
+                await msg.reply('SOON 🦎🔥🧪🐉 (confirmed sneak Aug 15th)');
                 break
             case '!sweep':
                 await msg.reply('🧹🧹🦎🦎🧹🧹🦎🦎');
@@ -110,7 +110,7 @@ async function handleMessage(msg) {
                 await msg.reply('🔥🐰‍ BUNNY GANG 🐰‍🔥');
                 break
             case '!suit':
-                await msg.reply('🔥🤵‍ SUIT GANG 🤵‍🔥');
+                await msg.reply('🔥🕴️🕺🕴️🔥');
                 break
             case '!spacesuit':
             case '!space':
