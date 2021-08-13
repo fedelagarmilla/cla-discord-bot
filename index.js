@@ -69,7 +69,7 @@ async function handleMessage(msg) {
                 await msg.reply('🦎💎 HODL 💎🦎');
                 break
             case '!roof':
-            case '!cieling':
+            case '!ceiling':
                 await msg.reply('🦎🚀🌒 MARS 🚀🌒🐉');
                 break
             case '!general':
@@ -119,6 +119,10 @@ async function handleMessage(msg) {
             case '!space':
                 await msg.reply('🔥👨‍🚀‍ SPACE GANG 👨‍🚀‍🔥');
                 break       
+            case '!halo':
+            case '!holy':
+                await msg.reply('🔥‍🙏😇 HOLY GANG ‍😇🙏‍🔥');
+                break
             case '!halo':
             case '!holy':
                 await msg.reply('🔥‍🙏😇 HOLY GANG ‍😇🙏‍🔥');
