@@ -1,10 +1,13 @@
 //const Discord = require("discord.js");
 const { Client, Intents, Interaction} = require('discord.js');
-const puppeteer = require('puppeteer');
+const puppeteer1 = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const pluginStealth = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(pluginStealth());
 require("dotenv").config();
 
 var floorValue = '🌋'
-var live = false
+var live = true
 console.log(process.version)
 
 
@@ -115,6 +118,10 @@ async function handleMessage(msg) {
             case '!spacesuit':
             case '!space':
                 await msg.reply('🔥👨‍🚀‍ SPACE GANG 👨‍🚀‍🔥');
+                break       
+            case '!halo':
+            case '!holy':
+                await msg.reply('🔥‍🙏😇 HOLY GANG ‍😇🙏‍🔥');
                 break
         }
     } catch (err) {
@@ -137,7 +144,8 @@ async function getFloor() {
     try {
         const page = await browser.newPage();
         await page.setDefaultNavigationTimeout(0);
-        await page.goto('https://opensea.io/collection/crazy-lizard-army');
+        await page.goto('https://opensea.io/collection/crazy-lizard-army', {waitUntil: 'networkidle0'});
+        await page.waitForXPath('/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div[4]/div[3]/a/div/div[1]/h3');
         const [el] = await page.$x('/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div[4]/div[3]/a/div/div[1]/h3');
         const textContent = await el.getProperty('textContent')
         const jsonFloor = await textContent.jsonValue()
