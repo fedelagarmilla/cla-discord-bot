@@ -56,7 +56,7 @@ async function handleMessage(msg) {
             case '!when dragon':
             case '!wen dragon':
             case '!when dragons':
-                await msg.reply('SOON 🦎🔥🧪🐉 (confirmed sneak Aug 15th)');
+                await msg.reply('SOON 🦎🔥🧪🐉 we have the greatest army ever!');
                 break
             case '!sweep':
                 await msg.reply('🧹🧹🦎🦎🧹🧹🦎🦎');
