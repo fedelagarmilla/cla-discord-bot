@@ -10,11 +10,11 @@ async function getFloorV2() {
         ).then((response) => {
             try {
                 const stats = response.data.collection.stats
-                floorValue = stats.floor_price
-                console.log('new floor: ' + floorValue);
+                this.floorValue = stats.floor_price
+                console.log('new floor: ' + this.floorValue);
             } catch (err) {
                 console.error('failed opensea response : ' + err.message);
-                floorValue = ' (error from os) '
+                this.floorValue = ' (error from os) '
             }
         }).catch((error) => {
             console.error(error);
