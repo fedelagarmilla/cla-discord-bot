@@ -10,8 +10,8 @@ async function getFloorV2() {
         ).then((response) => {
             try {
                 const stats = response.data.collection.stats
-                const newFloor = stats.floor_price
-                console.log('new floor: ' + newFloor);
+                floorValue = stats.floor_price
+                console.log('new floor: ' + floorValue);
             } catch (err) {
                 console.error('failed opensea response : ' + err.message);
                 floorValue = ' (error from os) '
