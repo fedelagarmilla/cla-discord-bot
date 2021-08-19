@@ -58,6 +58,7 @@ async function handleMessage(msg) {
                 await msg.reply('🔥🍭 POP GANG 🍭🔥');
                 break
             case '!party':
+            case '!micdrop':
                 await msg.reply('🔥🎧🎤 PARTY GANG 🎤🎧🔥');
                 break
             case '!kobe':

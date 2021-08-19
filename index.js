@@ -12,7 +12,7 @@ console.log(process.version)
 client.once('ready', () => {
     console.log('Ready!');
     console.log(`Logged in as ${client.user.tag}!`)
-    osManager.getFloor();
+    osManager.getFloorV2();
 });
 
 client.on('interactionCreate', interaction => {
