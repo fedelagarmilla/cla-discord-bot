@@ -6,7 +6,7 @@ async function handleMessage(msg) {
     try {
         switch (msg.content.toLowerCase()) {
             case '!floor':
-                await msg.reply('🦎 floor is ' + osManager.floorValue + ' 🚀' + '( not real time, opensea cannot keep up with our sales)');
+                await msg.reply('🦎 floor is ' + osManager.getNewFloor() + ' 🚀' + '( not real time, opensea cannot keep up with our sales)');
                 break
             case '!release the cow dragon bot':
                 await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');

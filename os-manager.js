@@ -1,26 +1,35 @@
 const axios = require('axios');
 
-var floorValue = '(getting from open sea)'
+var floorValue = '(updating)'
 
-async function getFloorV2() {
+function getFloorV2() {
     console.log("old floor: " + floorValue);
 
 
-        axios.get('https://api.opensea.io/api/v1/collection/crazy-lizard-army'
+        const res = axios.get('https://api.opensea.io/api/v1/collection/crazy-lizard-army'
         ).then((response) => {
             try {
                 const stats = response.data.collection.stats
-                this.floorValue = stats.floor_price
-                console.log('new floor: ' + this.floorValue);
+                updateFloor(stats.floor_price)
             } catch (err) {
                 console.error('failed opensea response : ' + err.message);
-                this.floorValue = ' (error from os) '
+                updateFloor('(updating)')
             }
         }).catch((error) => {
             console.error(error);
         });
 }
+
+function updateFloor(newFloor) {
+    console.log('new floor: ' + newFloor);
+    floorValue = newFloor
+}
+
+function getNewFloor() {
+    return floorValue
+}
+
 // refresh every 5 min
 setInterval(getFloorV2, 300000)
 
-module.exports = { getFloorV2, floorValue: floorValue };
+module.exports = { getFloorV2, getNewFloor, floorValue: floorValue };
