@@ -6,7 +6,8 @@ async function handleMessage(msg) {
     try {
         switch (msg.content.toLowerCase()) {
             case '!floor':
-                await msg.reply('🦎 floor is ' + osManager.getNewFloor() + ' 🚀');
+              //  await msg.reply('🦎 floor is ' + osManager.getNewFloor() + ' 🚀');
+                await msg.reply('🚧 will be back soon with traits floor 🚧');
                 break
             case '!release the cow dragon bot':
                 await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
