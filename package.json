@@ -13,7 +13,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "discord.js": "^13.0.1",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.5",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "twit": "^2.2.11"
   },
   "engines": {
     "node": "16.x"

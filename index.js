@@ -12,7 +12,6 @@ console.log(process.version)
 client.once('ready', () => {
     console.log('Ready!');
     console.log(`Logged in as ${client.user.tag}!`)
-    osManager.getFloorV2();
 });
 
 client.on('interactionCreate', interaction => {
@@ -34,4 +33,6 @@ client.login(process.env.DISCORD_BOT_TOKEN).catch(function(e) {
     console.log(e);
 });
 
+osManager.startFloorBot();
+osManager.startSalesBot()
 
