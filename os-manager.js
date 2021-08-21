@@ -37,7 +37,7 @@ function getOSSales() {
 
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
-            collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
+            collection_slug: 'crazy-lizard-army',
             event_type: 'successful',
             occurred_after: lastMinute,
             only_opensea: 'false'
