@@ -12,6 +12,10 @@ async function handleMessage(msg) {
             case '!release the cow dragon bot':
                 await msg.reply('🔥🔥🐄🐉🐉🥕🔥🔥');
                 break
+            case '!buy':
+            case '!link':
+                await msg.reply('https://opensea.io/collection/crazy-lizard-army?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW');
+                break
             case '!good morning':
             case '!goodmorning':
                 await msg.reply('please delist');
@@ -52,6 +56,7 @@ async function handleMessage(msg) {
                 await msg.reply('🔥🥕 CARROT GANG 🥕🔥');
                 break
             case '!money':
+            case '!pimp':
                 await msg.reply('🔥🤑 MONEY GANG 🤑🔥');
                 break
             case '!pop':
@@ -92,6 +97,10 @@ async function handleMessage(msg) {
             case '!halo':
             case '!holy':
                 await msg.reply('🔥‍🙏😇 HOLY GANG ‍😇🙏‍🔥');
+                break
+            case '!box':
+            case '!boxing':
+                await msg.reply('🔥🥊 KO GANG 🥊‍🔥');
                 break
         }
     } catch (err) {
