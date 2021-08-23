@@ -22,8 +22,9 @@ function getFloorV2() {
 }
 
 function updateFloor(newFloor) {
-    console.log('new floor: ' + newFloor);
-    floorValue = newFloor
+    const formatterFloor = newFloor.toFixed(2);
+    console.log('new floor: ' + formatterFloor);
+    floorValue = formatterFloor;
 }
 
 function getNewFloor() {
