@@ -29,17 +29,24 @@ function formatAndSendTweet(event) {
     // If you ctrl+f for the bundle name, you'll be able to find total_price, which will be the sale price expressed in wei.
     const formattedTokenPrice = ethers.utils.formatEther(totalPrice.toString());
     const formattedUsdPrice = (formattedTokenPrice * usdValue).toFixed(2);
+    const formattedEthPrice = (formattedTokenPrice * 1).toFixed(3);
+
     const formattedPriceSymbol = (
         (tokenSymbol === 'WETH' || tokenSymbol === 'ETH')
             ? 'Ξ'
             : ` ${tokenSymbol}`
     );
-    console.log('total price: ' + totalPrice)
-    var tweetText = `${tokenName} bought for ${formattedTokenPrice}${formattedPriceSymbol} ($${formattedUsdPrice}) ${openseaLink}`;
-    //  if (tokenSymbol === 'USDC') {
-    //        const totalUsd = totalPrice.toFixed(2)
-    //      tweetText = `${tokenName} bought for ${totalUsd}${formattedPriceSymbol} ${openseaLink}`;
-    // }
+    // seems the only 3 options that work on "order_by" param are "total_price", "sale_date" and "token_id"
+    // y
+    // If you ctrl+f for the bundle name, you'll be able to find total_price, which will be the sale price expressed in wei.
+
+    console.log(tokenSymbol + ' : ' + totalPrice)
+    var tweetText = `${tokenName} bought for ${formattedEthPrice}${formattedPriceSymbol} ($${formattedUsdPrice}) ${openseaLink}`;
+    if (tokenSymbol === 'USDC') {
+        console.log('token id: ' + tokenId)
+        tweetText = `${tokenName} bought ${openseaLink}`;
+    }
+
     console.log(tweetText);
 
     return handleDupesAndTweet(tokenName, tweetText, image);
