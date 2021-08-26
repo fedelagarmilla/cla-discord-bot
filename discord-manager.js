@@ -115,6 +115,7 @@ async function handleMessage(msg) {
 function setSalesChannel(channel) {
     console.log("sales channel: " + channel)
     salesChannel = channel
+    salesChannel.send('🦎🚀🌒')
 }
 
 function postSale(sale) {
