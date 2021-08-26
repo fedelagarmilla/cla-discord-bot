@@ -46,9 +46,7 @@ function formatAndSendTweet(event) {
         console.log('token id: ' + tokenId)
         tweetText = `${tokenName} bought ${openseaLink}`;
     }
-
     console.log(tweetText);
-
     return handleDupesAndTweet(tokenName, tweetText, image);
 }
 
@@ -61,8 +59,8 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
             // No duplicate statuses found
             if (_.isEmpty(data) || _.isEmpty(statuses)) {
                 console.log('No duplicate statuses found, continuing to tweet...');
-
-                return tweet(tweetText, imageUrl);
+                tweet(tweetText, imageUrl);
+                return true;
             }
 
             const mostRecentMatchingTweetCreatedAt = _.get(statuses[0], 'created_at');
@@ -73,13 +71,14 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
             // Status found is older than 10 minutes, not a cached transaction, just sold at same price
             if (statusOlderThan10Mins) {
                 console.log('Previous status is older than 10 minutes, continuing to tweet...');
-
-                return tweet(tweetText, imageUrl);
+                tweet(tweetText, imageUrl);
+                return true;
             }
-
             console.error('Tweet is a duplicate; possible delayed transaction retrieved from OpenSea');
+            return false;
         } else {
             console.error(error);
+            return false;
         }
     });
 }

@@ -1,6 +1,10 @@
 
 // commands: floor, dragon, sweep, paper, mu/cow, carrot, money, pop/candy, party, kobe, pistol/gun, pimp, cream, zombie, bunny
-const osManager = require('./os-manager')
+const { MessageEmbed } = require('discord.js');
+const _ = require("lodash");
+const { ethers } = require('ethers');
+
+var salesChannel = ""
 
 async function handleMessage(msg) {
     try {
@@ -108,6 +112,48 @@ async function handleMessage(msg) {
     }
 }
 
+function setSalesChannel(channel) {
+    console.log("sales channel: " + channel)
+    salesChannel = channel
+}
+
+function postSale(sale) {
+    const formattedTokenPrice = ethers.utils.formatEther(sale.total_price.toString());
+    const formattedEthPrice = (formattedTokenPrice * 1).toFixed(3);
+    var priceText = `${formattedEthPrice}${ethers.constants.EtherSymbol}`;
+
+    const message = new MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(sale.asset.name + ' sold!')
+        .setURL(sale.asset.permalink)
+        .setThumbnail(sale.asset.image_url)
+        .addFields(
+            { name: 'Amount', value: `${priceText}`},
+            { name: 'Buyer', value: sale?.winner_account?.address, }
+        )
+        .setTimestamp(Date.parse(`${sale?.created_date}Z`))
+    salesChannel.send({ embeds: [message] });
+}
+
+const buildMessage = (sale) => (
+    new MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(sale.asset.name + ' sold!')
+        .setURL(sale.asset.permalink)
+        .setAuthor('Crazy Lizard Army Sales', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png')
+        .setThumbnail(sale.asset.collection.image_url)
+        .addFields(
+            { name: 'Name', value: sale.asset.name },
+            { name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price || '0')}${ethers.constants.EtherSymbol}`},
+            { name: 'Buyer', value: sale?.winner_account?.address, },
+            { name: 'Seller', value: sale?.seller?.address,  },
+        )
+        .setTimestamp(Date.parse(`${sale?.created_date}Z`))
+        .setFooter('Sold on OpenSea', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png')
+)
+
 module.exports = {
-    handleMessage: handleMessage
+    handleMessage: handleMessage,
+    setSalesChannel: setSalesChannel,
+    postSale: postSale
 };

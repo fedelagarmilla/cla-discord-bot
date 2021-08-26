@@ -1,7 +1,7 @@
 require("dotenv").config();
 //const Discord = require("discord.js");
 
-const {Client, Intents} = require("discord.js");
+const {Client, Intents, TextChannel} = require("discord.js");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const discordManager = require('./discord-manager');
 const osManager = require('./os-manager')
@@ -12,6 +12,11 @@ console.log(process.version)
 client.once('ready', () => {
     console.log('Ready!');
     console.log(`Logged in as ${client.user.tag}!`)
+    // setup sales channel
+    client.channels.fetch(process.env.DISCORD_SALES_CHANNEL_ID)
+        .then(channel => discordManager.setSalesChannel(channel))
+        .catch(console.error);
+    osManager.startSalesBot()
 });
 
 client.on('interactionCreate', interaction => {
@@ -34,5 +39,4 @@ client.login(process.env.DISCORD_BOT_TOKEN).catch(function(e) {
 });
 
 osManager.startFloorBot();
-osManager.startSalesBot()
 

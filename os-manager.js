@@ -2,6 +2,7 @@ const axios = require('axios');
 const _ = require('lodash');
 const moment = require('moment');
 const tweet = require('./tweet');
+const discordManager = require('./discord-manager');
 
 var floorValue = '(updating)'
 
@@ -49,7 +50,12 @@ function getOSSales() {
         console.log(`${events.length} sales in the last 5 minutes...`);
 
         _.each(events, (event) => {
-            return tweet.formatAndSendTweet(event);
+            tweet.formatAndSendTweet(event).then((response) => {
+                discordManager.postSale(event);
+            }).catch((error) => {
+                console.error(error);
+            });
+            return;
         });
     }).catch((error) => {
         console.error(error);
