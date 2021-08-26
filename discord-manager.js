@@ -118,21 +118,25 @@ function setSalesChannel(channel) {
 }
 
 function postSale(sale) {
-    const formattedTokenPrice = ethers.utils.formatEther(sale.total_price.toString());
-    const formattedEthPrice = (formattedTokenPrice * 1).toFixed(3);
-    var priceText = `${formattedEthPrice}${ethers.constants.EtherSymbol}`;
+    try {
+        const formattedTokenPrice = ethers.utils.formatEther(sale.total_price.toString());
+        const formattedEthPrice = (formattedTokenPrice * 1).toFixed(3);
+        var priceText = `${formattedEthPrice}${ethers.constants.EtherSymbol}`;
 
-    const message = new MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle(sale.asset.name + ' sold!')
-        .setURL(sale.asset.permalink)
-        .setThumbnail(sale.asset.image_url)
-        .addFields(
-            { name: 'Amount', value: `${priceText}`},
-            { name: 'Buyer', value: sale?.winner_account?.address, }
-        )
-        .setTimestamp(Date.parse(`${sale?.created_date}Z`))
-    salesChannel.send({ embeds: [message] });
+        const message = new MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle(sale.asset.name + ' sold!')
+            .setURL(sale.asset.permalink)
+            .setThumbnail(sale.asset.image_url)
+            .addFields(
+                {name: 'Amount', value: `${priceText}`},
+                {name: 'Buyer', value: sale?.winner_account?.address,}
+            )
+            .setTimestamp(Date.parse(`${sale?.created_date}Z`))
+        salesChannel.send({embeds: [message]});
+    } catch (err) {
+        console.error('failed sending to discord: ' + err.message);
+    }
 }
 
 const buildMessage = (sale) => (
