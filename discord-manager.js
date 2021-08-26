@@ -122,15 +122,15 @@ function postSale(sale) {
         const formattedTokenPrice = ethers.utils.formatEther(sale.total_price.toString());
         const formattedEthPrice = (formattedTokenPrice * 1).toFixed(3);
         var priceText = `${formattedEthPrice}${ethers.constants.EtherSymbol}`;
-
+        var buyAddress = sale?.winner_account?.address
         const message = new MessageEmbed()
-            .setColor('#0099ff')
+            .setColor('#00b816')
             .setTitle(sale.asset.name + ' sold!')
             .setURL(sale.asset.permalink)
             .setThumbnail(sale.asset.image_url)
             .addFields(
                 {name: 'Amount', value: `${priceText}`},
-                {name: 'Buyer', value: sale?.winner_account?.address,}
+                {name: 'Buyer', value: `[${buyAddress}](https://opensea.io/${buyAddress})`}
             )
             .setTimestamp(Date.parse(`${sale?.created_date}Z`))
         salesChannel.send({embeds: [message]});
