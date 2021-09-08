@@ -47,7 +47,35 @@ function getOSSales() {
     }).then((response) => {
         const events = _.get(response, ['data', 'asset_events']);
 
-        console.log(`${events.length} sales in the last 5 minutes...`);
+        console.log(`${events.length} lizard sales in the last 5 minutes...`);
+
+        _.each(events, (event) => {
+            tweet.formatAndSendTweet(event).then((response) => {
+                discordManager.postSale(event);
+            }).catch((error) => {
+                console.error(error);
+            });
+            return;
+        });
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
+function getOSDragonSales() {
+    const lastMinute = moment().startOf('minute').subtract(299, "seconds").unix();
+
+    axios.get('https://api.opensea.io/api/v1/events', {
+        params: {
+            collection_slug: 'crazy-dragon-corps',
+            event_type: 'successful',
+            occurred_after: lastMinute,
+            only_opensea: 'false'
+        }
+    }).then((response) => {
+        const events = _.get(response, ['data', 'asset_events']);
+
+        console.log(`${events.length} dragon sales in the last 5 minutes...`);
 
         _.each(events, (event) => {
             tweet.formatAndSendTweet(event).then((response) => {
@@ -64,15 +92,17 @@ function getOSSales() {
 
 function startSalesBot() {
     getOSSales()
+    getOSDragonSales()
     console.log('starting sales bot');
     setInterval(getOSSales, 300000);
+    setInterval(getOSDragonSales, 300000);
 }
 
 // refresh every 5 min
 function startFloorBot() {
-    getFloorV2()
-    console.log('starting floor bot');
-    setInterval(getFloorV2, 300000);
+   // getFloorV2()
+ //   console.log('starting floor bot');
+  //  setInterval(getFloorV2, 300000);
 }
 
 module.exports = { startSalesBot, getNewFloor, startFloorBot, floorValue: floorValue };
