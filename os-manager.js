@@ -8,7 +8,7 @@ var floorValue = '(updating)'
 
 function getFloorV2() {
   //  console.log("old floor: " + floorValue);
-        const res = axios.get('https://api.opensea.io/api/v1/collection/crazy-lizard-army'
+        const res = axios.get('https://api.opensea.io/api/v1/collection/happyland-gummy-bears-official'
         ).then((response) => {
             try {
                 const stats = response.data.collection.stats
@@ -39,7 +39,7 @@ function getOSSales() {
 
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
-            collection_slug: 'crazy-lizard-army',
+            collection_slug: 'happyland-gummy-bears-official',
             event_type: 'successful',
             occurred_after: lastMinute,
             only_opensea: 'false'
@@ -47,7 +47,7 @@ function getOSSales() {
     }).then((response) => {
         const events = _.get(response, ['data', 'asset_events']);
 
-        console.log(`${events.length} lizard sales in the last 5 minutes...`);
+        console.log(`${events.length} bear sales in the last 5 minutes...`);
 
         _.each(events, (event) => {
             tweet.formatAndSendTweet(event).then((response) => {
@@ -67,7 +67,7 @@ function getOSDragonSales() {
 
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
-            collection_slug: 'crazy-dragon-corps',
+            collection_slug: 'happyland-wummy-gurms',
             event_type: 'successful',
             occurred_after: lastMinute,
             only_opensea: 'false'
@@ -75,11 +75,11 @@ function getOSDragonSales() {
     }).then((response) => {
         const events = _.get(response, ['data', 'asset_events']);
 
-        console.log(`${events.length} dragon sales in the last 5 minutes...`);
+        console.log(`${events.length} worm sales in the last 5 minutes...`);
 
         _.each(events, (event) => {
             tweet.formatAndSendTweet(event).then((response) => {
-                discordManager.postSale(event);
+                //discordManager.postSale(event);
             }).catch((error) => {
                 console.error(error);
             });

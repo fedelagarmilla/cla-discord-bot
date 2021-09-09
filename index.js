@@ -1,14 +1,17 @@
 require("dotenv").config();
 //const Discord = require("discord.js");
-
+/*
 const {Client, Intents, TextChannel} = require("discord.js");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const discordManager = require('./discord-manager');
+*/
 const osManager = require('./os-manager')
 
 var live = true
 console.log(process.version)
 
+osManager.startSalesBot()
+/*
 client.once('ready', () => {
     console.log('Ready!');
     console.log(`Logged in as ${client.user.tag}!`)
@@ -39,4 +42,5 @@ client.login(process.env.DISCORD_BOT_TOKEN).catch(function(e) {
 });
 
 osManager.startFloorBot();
+*/
 
