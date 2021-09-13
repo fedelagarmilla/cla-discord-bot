@@ -140,6 +140,28 @@ function postSale(sale) {
     }
 }
 
+function postMint(sale) {
+    try {
+        var buyAddress = sale?.to_account?.address
+        var blackHole = sale?.from_account?.address
+       // var img = sale.asset.image_url
+        const message = new MessageEmbed()
+            .setColor('#ff6700')
+            .setTitle('Crazy Dragon Corps #' + sale.asset.token_id + ' minted!')
+            .setURL(sale.asset.permalink)
+            .setThumbnail(sale.asset.image_url)
+            .addFields(
+                {name: 'Owner', value: `[${buyAddress}](https://opensea.io/${buyAddress})`}
+            )
+            .setTimestamp(Date.parse(`${sale?.created_date}Z`))
+        if (blackHole == '0x0000000000000000000000000000000000000000') {
+            salesChannel.send({embeds: [message]});
+        }
+    } catch (err) {
+        console.error('failed sending to discord: ' + err.message);
+    }
+}
+
 const buildMessage = (sale) => (
     new MessageEmbed()
         .setColor('#0099ff')
@@ -160,5 +182,6 @@ const buildMessage = (sale) => (
 module.exports = {
     handleMessage: handleMessage,
     setSalesChannel: setSalesChannel,
-    postSale: postSale
+    postSale: postSale,
+    postMint: postMint
 };
