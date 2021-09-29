@@ -26,7 +26,7 @@ client.on('interactionCreate', interaction => {
 });
 
 client.on("messageCreate", msg => {
-    if (msg.content === '!release the cow dragon bot')  {
+    if (msg.content === '!start bot')  {
         live = true
     }
     if (live === true) {
