@@ -52,5 +52,4 @@ module.exports = {
     handleMessage: handleMessage,
     setSalesChannel: setSalesChannel,
     postSale: postSale,
-    postMint: postMint
 };
