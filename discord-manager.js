@@ -1,4 +1,3 @@
-const osManager = require('./os-manager')
 const { MessageEmbed } = require('discord.js');
 const _ = require("lodash");
 const { ethers } = require('ethers');
@@ -8,9 +7,6 @@ var salesChannel = ""
 async function handleMessage(msg) {
     try {
         switch (msg.content.toLowerCase()) {
-            case '!floor':
-                await msg.reply('floor is ' + osManager.getNewFloor() + 'Ξ');
-                break
            case '!ribbit':
                 await msg.reply('ribbit');
                 break
