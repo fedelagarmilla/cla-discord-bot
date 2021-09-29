@@ -1,4 +1,4 @@
-
+const osManager = require('./os-manager')
 const { MessageEmbed } = require('discord.js');
 const _ = require("lodash");
 const { ethers } = require('ethers');
