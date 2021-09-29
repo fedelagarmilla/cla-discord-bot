@@ -8,7 +8,7 @@ var floorValue = '(updating)'
 
 function getFloorV2() {
       console.log("old floor: " + floorValue);
-        const res = axios.get('https://api.opensea.io/api/v1/collection/notorious-frogs'
+        const res = axios.get('https://api.opensea.io/api/v1/collection/' + process.env.OPENSEA_COLLECTION_SLUG
         ).then((response) => {
             try {
                 const stats = response.data.collection.stats
@@ -39,7 +39,7 @@ function getOSSales() {
 
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
-            collection_slug: 'notorious-frogs',
+            collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
             event_type: 'successful',
             occurred_after: lastMinute,
             only_opensea: 'false'
@@ -47,7 +47,7 @@ function getOSSales() {
     }).then((response) => {
         const events = _.get(response, ['data', 'asset_events']);
 
-        console.log(`${events.length} frog sales in the last 5 minutes...`);
+        console.log(`${events.length} sales in the last 5 minutes...`);
 
         _.each(events, (event) => {
             tweet.formatAndSendTweet(event).then((response) => {
