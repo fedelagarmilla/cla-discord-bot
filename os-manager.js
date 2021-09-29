@@ -70,9 +70,9 @@ function startSalesBot() {
 
 // refresh every 5 min
 function startFloorBot() {
-    getFloorV2()
-    console.log('starting floor bot');
-    setInterval(getFloorV2, 300000);
+//    getFloorV2()
+//    console.log('starting floor bot');
+//    setInterval(getFloorV2, 300000);
 }
 
 module.exports = { startSalesBot, getNewFloor, startFloorBot, floorValue: floorValue };
