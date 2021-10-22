@@ -16,7 +16,8 @@ client.once('ready', () => {
     client.channels.fetch(process.env.DISCORD_SALES_CHANNEL_ID)
         .then(channel => discordManager.setSalesChannel(channel))
         .catch(console.error);
-    osManager.startSalesBot()
+   // osManager.startSalesBot()
+    osManager.startMintBot();
 });
 
 client.on('interactionCreate', interaction => {
@@ -38,5 +39,5 @@ client.login(process.env.DISCORD_BOT_TOKEN).catch(function(e) {
     console.log(e);
 });
 
-osManager.startFloorBot();
+//osManager.startFloorBot();
 

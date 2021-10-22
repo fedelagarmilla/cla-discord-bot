@@ -62,10 +62,40 @@ function getOSSales() {
     });
 }
 
+function getOSPumpkinMints() {
+    const lastMinute = moment().startOf('minute').subtract(299, "seconds").unix();
+
+    axios.get('https://api.opensea.io/api/v1/events', {
+        params: {
+            collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
+            event_type: 'transfer',
+            occurred_after: lastMinute,
+            only_opensea: 'false'
+        }
+    }).then((response) => {
+        const events = _.get(response, ['data', 'asset_events']);
+
+        console.log(`${events.length} mints in the last 30 minutes...`);
+
+        _.each(events, (event) => {
+                discordManager.postMint(event);
+            return;
+        });
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
 function startSalesBot() {
-    getOSSales()
-    console.log('starting sales bot');
-    setInterval(getOSSales, 300000);
+ //   getOSSales()
+//    console.log('starting sales bot');
+//    setInterval(getOSSales, 300000);
+}
+
+function startMintBot() {
+    getOSPumpkinMints()
+    console.log('starting mint bot')
+    setInterval(getOSPumpkinMints, 600000);
 }
 
 // refresh every 5 min
@@ -75,4 +105,4 @@ function startFloorBot() {
     setInterval(getFloorV2, 300000);
 }
 
-module.exports = { startSalesBot, getNewFloor, startFloorBot, floorValue: floorValue };
+module.exports = { startSalesBot, getNewFloor, startFloorBot, startMintBot, floorValue: floorValue };
